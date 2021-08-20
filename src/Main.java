@@ -1,3 +1,4 @@
+/*
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -21,6 +22,7 @@ public class Main {
     public static void main(String[] args) {
 
 //Method 1 java.net.HttpURLConnection
+*/
 /*
         BufferedReader reader;
         String line;
@@ -59,7 +61,8 @@ public class Main {
             e.printStackTrace();
         } finally {
             connection.disconnect();
-        }*/
+        }*//*
+
 
 //Method 2 java.net..http.HttpClient  in Java 11
 
@@ -89,3 +92,4 @@ public class Main {
 
 
 }
+*/
