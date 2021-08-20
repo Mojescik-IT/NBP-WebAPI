@@ -13,7 +13,7 @@ public class WebAPI {
 //Method 2 java.net..http.HttpClient  in Java 11
 
         HttpClient client = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder().uri(URI.create("http://api.nbp.pl/api/cenyzlota/last/5/?format=json")).build();
+        HttpRequest request = HttpRequest.newBuilder().uri(URI.create("http://api.nbp.pl/api/cenyzlota/last/100/?format=json")).build();
         client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                 .thenApply(HttpResponse::body)
                 .thenApply(WebAPI::parse)
@@ -21,6 +21,7 @@ public class WebAPI {
 
     }
     //parser
+
     public static String parse(String responseBody) {
         JSONArray pricesOfGold = new JSONArray(responseBody);
         for (int i = 0; i < pricesOfGold.length(); i++) {
@@ -28,8 +29,15 @@ public class WebAPI {
             String data = priceOfGold.getString("data");
             double cena = priceOfGold.getDouble("cena");
 
+        // Numeracja każdego pobranego wpisu - ID
+        int id = i+1;
+        if (id < i){
+            i++;
+        }
 
-            System.out.println(data + " - " + cena + " PLN");
+
+
+            System.out.println(id + " " + data + " - " + cena + " PLN");
 
         }
         return null;
