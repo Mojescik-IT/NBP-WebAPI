@@ -15,13 +15,26 @@ import java.net.http.HttpResponse;
 public class Main {
 
 
-//    private static HttpURLConnection connection;  //method 1
+    //private static HttpURLConnection connection;  //method 1
 
 
     public static void main(String[] args) {
 
+
+
+        System.out.println("========== START PROGRAMU ==========\n");
+
+        //wywołanie metody Menu, która wyświetla opcje w menu
+        Menu menu = new Menu();
+        menu.startMenu();
+
+
+
+    }
+
 //Method 1 java.net.HttpURLConnection
- /*       BufferedReader reader;
+/*
+       BufferedReader reader;
         String line;
         StringBuffer responseContent = new StringBuffer();
         try {
@@ -61,9 +74,11 @@ public class Main {
         }
 */
 
+
+
 //Method 2 java.net..http.HttpClient  in Java 11
 
-        HttpClient client = HttpClient.newHttpClient();
+/*        HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder().uri(URI.create("https://jsonplaceholder.typicode.com/albums")).build();
         client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                 .thenApply(HttpResponse::body)
@@ -85,7 +100,7 @@ public class Main {
         }
         return null;
 
-    }
+    }*/
 
 
 }
