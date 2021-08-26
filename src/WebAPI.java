@@ -87,6 +87,58 @@ public class WebAPI {
 
 
 
+    void historicalGoldPricesRange() {
+        String startDate; //ilośc zwracanych wpisów z historii
+        String endDate; //ilośc zwracanych wpisów z historii
+
+
+
+        Scanner answer1 = new Scanner(System.in);
+        Scanner answer2 = new Scanner(System.in);
+
+        System.out.print("Wybierz zakres OD (data w formacie rrrr-mm-dd: ");
+        startDate = answer1.next();
+
+        System.out.print("Wybierz zakres DO (data w formacie rrrr-mm-dd: ");
+        endDate = answer2.next();
+
+
+
+
+        String urlAddress = "http://api.nbp.pl/api/cenyzlota/" + startDate + "/" + endDate + "/?format=json";
+        //String urlAddress = "http://api.nbp.pl/api/cenyzlota/2021-08-20/2021-08-25/?format=json";
+
+
+        //Method 2 java.net..http.HttpClient  in Java 11
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder().uri(URI.create(urlAddress)).build();
+        client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                .thenApply(HttpResponse::body)
+                .thenApply(WebAPI::parse3)
+                .join();
+    }
+
+    //parser
+    public static String parse3(String responseBody) {
+        JSONArray pricesOfGold = new JSONArray (responseBody);
+        for (int i = 0; i < pricesOfGold.length(); i++) {
+            JSONObject priceOfGold = pricesOfGold.getJSONObject(i);
+            String data = priceOfGold.getString("data");
+            double cena = priceOfGold.getDouble("cena");
+
+            // Numeracja każdego pobranego wpisu - ID
+            int id = i + 1;
+            if (id == i) {
+                i++;
+            }
+            // wypisywanie rezultatów
+            System.out.println(" Cena złota z dnia : " + data + " wynosi :" + "\n" + id + ". " + cena + " PLN");
+        }
+        return null;
+    }
+
+
+
 }
 
 

@@ -14,6 +14,7 @@ public class Menu {
         System.out.println("==========  Wybierz opcję z MENU ========== ");
         System.out.println("    [1] - Pobierz aktualną cenę złota ");
         System.out.println("    [2] - Pobierz historyczną cenę złota ");
+        System.out.println("    [3] - Pobierz historyczną cenę złota wg. podanego zakresu dat ");
         System.out.print("Wybierz opcję: ");
         answer = menuAnswer.nextInt();
 
@@ -28,6 +29,14 @@ public class Menu {
             WebAPI webAPI = new WebAPI();  //wywołanie metody AnswerTwo
             webAPI.historicalGoldPrices(); // metoda Calculator
 
+
+        } else if (answer == 3) {
+            System.out.println("Wybrano opcję: 3");
+            WebAPI webAPI = new WebAPI();  //wywołanie metody AnswerTwo
+            webAPI.historicalGoldPricesRange(); // metoda Calculator
+
         }
     }
+
 }
+
